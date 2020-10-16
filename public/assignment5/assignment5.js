@@ -1,13 +1,13 @@
 const RED_HEX = "#FF0000"
-const RED_RGB = webglUtils.hexToRgb(RED_HEX)
+const RED_RGB = webglUtils2.hexToRgb(RED_HEX)
 const RECTANGLE = "RECTANGLE"
 const TRIANGLE = "TRIANGLE"
 const STAR = "STAR"
 const CIRCLE = "CIRCLE"
 const BLUE_HEX= "#0000FF"
 const GREEN_HEX = "#00FF00"
-const BLUE_RGB = webglUtils.hexToRgb(BLUE_HEX)
-const GREEN_RGB = webglUtils.hexToRgb(GREEN_HEX)
+const BLUE_RGB = webglUtils2.hexToRgb(BLUE_HEX)
+const GREEN_RGB = webglUtils2.hexToRgb(GREEN_HEX)
 const origin = {x: 0, y: 0, z: 0}
 const sizeOne = {width: 1, height: 1, depth: 1}
 const CUBE = "CUBE"
@@ -45,7 +45,7 @@ let shapes = [
 
 const addShape = (newShape, type) => {
   const colorHex = document.getElementById("color").value
-  const colorRgb = webglUtils.hexToRgb(colorHex)
+  const colorRgb = webglUtils2.hexToRgb(colorHex)
   let tx = 0
   let ty = 0
   let tz = 0
@@ -68,6 +68,7 @@ const addShape = (newShape, type) => {
 
 let gl
 let uniformColor
+let attributeCoords
 let bufferCoords
 let uniformMatrix
 
@@ -102,16 +103,16 @@ const init = () => {
       false);
 
 
-/*  const program = webglUtils.createProgramFromScripts(gl, "#vertex-shader-2d", "#fragment-shader-2d");
-  gl.useProgram(program);*/
 
-  const program = webglUtils
+  const program = webglUtils2
+
   .createProgramFromScripts(gl, "#vertex-shader-3d", "#fragment-shader-3d");
+  gl.useProgram(program);
 
 
   // get reference to GLSL attributes and uniforms
   attributeCoords = gl.getAttribLocation(program, "a_coords");
-  const uniformResolution = gl.getUniformLocation(program, "u_resolution");
+  //const uniformResolution = gl.getUniformLocation(program, "u_resolution");
   uniformColor = gl.getUniformLocation(program, "u_color");
   uniformMatrix = gl.getUniformLocation(program, "u_matrix");
 
@@ -170,7 +171,7 @@ const updateScale = (event, axis) => {
 
 const updateColor = (event) => {
   const value = event.target.value
-  const rgb = webglUtils.hexToRgb(value)
+  const rgb = webglUtils2.hexToRgb(value)
   shapes[selectedShapeIndex].color = rgb
   render()
 }
@@ -192,7 +193,7 @@ const selectShape = (selectedIndex) => {
   document.getElementById("ry").value = shapes[selectedIndex].rotation.y
   document.getElementById("rz").value = shapes[selectedIndex].rotation.z
   document.getElementById("fv").value = m4.radToDeg(fieldOfViewRadians)
-  const hexColor = webglUtils.rgbToHex(shapes[selectedIndex].color)
+  const hexColor = webglUtils2.rgbToHex(shapes[selectedIndex].color)
   document.getElementById("color").value = hexColor
 }
 

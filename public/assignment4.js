@@ -66,7 +66,7 @@ const addTriangle = (center) => {
   let x = parseInt(document.getElementById("x").value)
   let y = parseInt(document.getElementById("y").value)
   const colorHex = document.getElementById("color").value
-  const colorRgb = webglUtils.hexToRgb(colorHex)
+  const colorRgb = webglUtils2.hexToRgb(colorHex)
   const width = parseInt(document.getElementById("width").value)
   const height = parseInt(document.getElementById("height").value)
   if (center) {
@@ -91,7 +91,7 @@ const addRectangle = (center) => {
 
   const hex = document.getElementById("color").value
   console.log(hex)
-  const rgb = webglUtils.hexToRgb(hex)
+  const rgb = webglUtils2.hexToRgb(hex)
   console.log(rgb)
 
 

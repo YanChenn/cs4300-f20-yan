@@ -1,4 +1,4 @@
-const webglUtils = {
+const webglUtils2 = {
   hexToRgb: (hex) => {
     let parseRgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     let rgb = {
@@ -16,9 +16,9 @@ const webglUtils = {
     return hex.length == 1 ? "0" + hex : hex;
   },
   rgbToHex: (rgb) => {
-    const redHex = webglUtils.componentToHex(rgb.red * 256)
-    const greenHex = webglUtils.componentToHex(rgb.green * 256)
-    const blueHex = webglUtils.componentToHex(rgb.blue * 256)
+    const redHex = webglUtils2.componentToHex(rgb.red * 256)
+    const greenHex = webglUtils2.componentToHex(rgb.green * 256)
+    const blueHex = webglUtils2.componentToHex(rgb.blue * 256)
     return `#${redHex}${greenHex}${blueHex}`
   },
   createProgramFromScripts: (gl, vertexShaderElementId, fragmentShaderElementId) => {
