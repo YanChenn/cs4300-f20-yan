@@ -72,6 +72,43 @@ const m4 = {
     ];
   },
 
+  transpose: (m) => {
+    const m00 = m[0 * 4 + 0];
+    const m01 = m[0 * 4 + 1];
+    const m02 = m[0 * 4 + 2];
+    const m03 = m[0 * 4 + 3];
+    const m10 = m[1 * 4 + 0];
+    const m11 = m[1 * 4 + 1];
+    const m12 = m[1 * 4 + 2];
+    const m13 = m[1 * 4 + 3];
+    const m20 = m[2 * 4 + 0];
+    const m21 = m[2 * 4 + 1];
+    const m22 = m[2 * 4 + 2];
+    const m23 = m[2 * 4 + 3];
+    const m30 = m[3 * 4 + 0];
+    const m31 = m[3 * 4 + 1];
+    const m32 = m[3 * 4 + 2];
+    const m33 = m[3 * 4 + 3];
+
+    return [m00,
+      m10,
+      m20,
+      m30,
+      m01,
+      m11,
+      m21,
+      m31,
+      m02,
+      m12,
+      m22,
+      m32,
+      m03,
+      m13,
+      m23,
+      m33]
+
+  },
+
   translation: (tx, ty, tz) => [
     1,  0,  0,  0,
     0,  1,  0,  0,
@@ -122,15 +159,15 @@ const m4 = {
     0,  0,  0,  1,
   ],
 
-  translate: (m, tx, ty, tz) => m4.multiply(m, m4.translation(tx, ty, tz)),
+  translate: (m, tx, ty, tz) => m7.multiply(m, m7.translation(tx, ty, tz)),
 
-  xRotate: (m, angleInRadians) => m4.multiply(m, m4.xRotation(angleInRadians)),
+  xRotate: (m, angleInRadians) => m7.multiply(m, m7.xRotation(angleInRadians)),
 
-  yRotate: (m, angleInRadians) => m4.multiply(m, m4.yRotation(angleInRadians)),
+  yRotate: (m, angleInRadians) => m7.multiply(m, m7.yRotation(angleInRadians)),
 
-  zRotate: (m, angleInRadians) => m4.multiply(m, m4.zRotation(angleInRadians)),
+  zRotate: (m, angleInRadians) => m7.multiply(m, m7.zRotation(angleInRadians)),
 
-  scale: (m, sx, sy, sz) => m4.multiply(m, m4.scaling(sx, sy, sz)),
+  scale: (m, sx, sy, sz) => m7.multiply(m, m7.scaling(sx, sy, sz)),
 
   inverse: (m) => {
     const m00 = m[0 * 4 + 0];
@@ -233,10 +270,10 @@ const m4 = {
   degToRad: (degrees) => degrees * Math.PI / 180,
 
   lookAt: (cameraPosition, target, up) => {
-    var zAxis = m4.normalize(
-        m4.subtractVectors(cameraPosition, target));
-    var xAxis = m4.normalize(m4.cross(up, zAxis));
-    var yAxis = m4.normalize(m4.cross(zAxis, xAxis));
+    var zAxis = m7.normalize(
+        m7.subtractVectors(cameraPosition, target));
+    var xAxis = m7.normalize(m7.cross(up, zAxis));
+    var yAxis = m7.normalize(m7.cross(zAxis, xAxis));
 
     return [
       xAxis[0], xAxis[1], xAxis[2], 0,
