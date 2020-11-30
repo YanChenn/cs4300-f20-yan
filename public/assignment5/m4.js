@@ -1,4 +1,4 @@
-const m4 = {
+const m7 = {
 
   radToDeg: (radians) => radians * 180 / Math.PI,
 
@@ -128,14 +128,14 @@ const m4 = {
     0,  0,  0,  1,
   ],
 
-  translate: (m, tx, ty, tz) => m4.multiply(m, m4.translation(tx, ty, tz)),
+  translate: (m, tx, ty, tz) => m7.multiply(m, m7.translation(tx, ty, tz)),
 
-  xRotate: (m, angleInRadians) => m4.multiply(m, m4.xRotation(angleInRadians)),
+  xRotate: (m, angleInRadians) => m7.multiply(m, m7.xRotation(angleInRadians)),
 
-  yRotate: (m, angleInRadians) => m4.multiply(m, m4.yRotation(angleInRadians)),
+  yRotate: (m, angleInRadians) => m7.multiply(m, m7.yRotation(angleInRadians)),
 
-  zRotate: (m, angleInRadians) => m4.multiply(m, m4.zRotation(angleInRadians)),
+  zRotate: (m, angleInRadians) => m7.multiply(m, m7.zRotation(angleInRadians)),
 
-  scale: (m, sx, sy, sz) => m4.multiply(m, m4.scaling(sx, sy, sz)),
+  scale: (m, sx, sy, sz) => m7.multiply(m, m7.scaling(sx, sy, sz)),
 
 };

@@ -177,7 +177,7 @@ const updateColor = (event) => {
 }
 
 const updateFieldOfView = (event) => {
-  fieldOfViewRadians = m4.degToRad(event.target.value);
+  fieldOfViewRadians = m7.degToRad(event.target.value);
   render();
 }
 
@@ -192,19 +192,19 @@ const selectShape = (selectedIndex) => {
   document.getElementById("rx").value = shapes[selectedIndex].rotation.x
   document.getElementById("ry").value = shapes[selectedIndex].rotation.y
   document.getElementById("rz").value = shapes[selectedIndex].rotation.z
-  document.getElementById("fv").value = m4.radToDeg(fieldOfViewRadians)
+  document.getElementById("fv").value = m7.radToDeg(fieldOfViewRadians)
   const hexColor = webglUtils2.rgbToHex(shapes[selectedIndex].color)
   document.getElementById("color").value = hexColor
 }
 
-let fieldOfViewRadians = m4.degToRad(60)
+let fieldOfViewRadians = m7.degToRad(60)
 const computeModelViewMatrix = (canvas, shape, aspect, zNear, zFar) => {
-  let M = m4.perspective(fieldOfViewRadians, aspect, zNear, zFar)
-  M = m4.translate(M, shape.translation.x, shape.translation.y, shape.translation.z)
-  M = m4.xRotate(M, m4.degToRad(shape.rotation.x))
-  M = m4.yRotate(M, m4.degToRad(shape.rotation.y))
-  M = m4.zRotate(M, m4.degToRad(shape.rotation.z))
-  M = m4.scale(M, shape.scale.x, shape.scale.y, shape.scale.z)
+  let M = m7.perspective(fieldOfViewRadians, aspect, zNear, zFar)
+  M = m7.translate(M, shape.translation.x, shape.translation.y, shape.translation.z)
+  M = m7.xRotate(M, m7.degToRad(shape.rotation.x))
+  M = m7.yRotate(M, m7.degToRad(shape.rotation.y))
+  M = m7.zRotate(M, m7.degToRad(shape.rotation.z))
+  M = m7.scale(M, shape.scale.x, shape.scale.y, shape.scale.z)
   return M
 }
 

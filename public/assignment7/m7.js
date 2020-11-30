@@ -1,4 +1,4 @@
-const m4 = {
+const m7 = {
 
   perspective: (fieldOfViewInRadians, aspect, near, far) => {
     const f = Math.tan(Math.PI * 0.5 - 0.5 * fieldOfViewInRadians);
@@ -159,15 +159,15 @@ const m4 = {
     0,  0,  0,  1,
   ],
 
-  translate: (m, tx, ty, tz) => m4.multiply(m, m4.translation(tx, ty, tz)),
+  translate: (m, tx, ty, tz) => m7.multiply(m, m7.translation(tx, ty, tz)),
 
-  xRotate: (m, angleInRadians) => m4.multiply(m, m4.xRotation(angleInRadians)),
+  xRotate: (m, angleInRadians) => m7.multiply(m, m7.xRotation(angleInRadians)),
 
-  yRotate: (m, angleInRadians) => m4.multiply(m, m4.yRotation(angleInRadians)),
+  yRotate: (m, angleInRadians) => m7.multiply(m, m7.yRotation(angleInRadians)),
 
-  zRotate: (m, angleInRadians) => m4.multiply(m, m4.zRotation(angleInRadians)),
+  zRotate: (m, angleInRadians) => m7.multiply(m, m7.zRotation(angleInRadians)),
 
-  scale: (m, sx, sy, sz) => m4.multiply(m, m4.scaling(sx, sy, sz)),
+  scale: (m, sx, sy, sz) => m7.multiply(m, m7.scaling(sx, sy, sz)),
 
   inverse: (m) => {
     const m00 = m[0 * 4 + 0];
@@ -270,10 +270,10 @@ const m4 = {
   degToRad: (degrees) => degrees * Math.PI / 180,
 
   lookAt: (cameraPosition, target, up) => {
-    var zAxis = m4.normalize(
-        m4.subtractVectors(cameraPosition, target));
-    var xAxis = m4.normalize(m4.cross(up, zAxis));
-    var yAxis = m4.normalize(m4.cross(zAxis, xAxis));
+    var zAxis = m7.normalize(
+        m7.subtractVectors(cameraPosition, target));
+    var xAxis = m7.normalize(m7.cross(up, zAxis));
+    var yAxis = m7.normalize(m7.cross(zAxis, xAxis));
 
     return [
       xAxis[0], xAxis[1], xAxis[2], 0,

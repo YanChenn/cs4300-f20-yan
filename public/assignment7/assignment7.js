@@ -114,7 +114,7 @@ let attributeCoords
 let uniformMatrix
 let uniformColor
 let bufferCoords
-let fieldOfViewRadians = m4.degToRad(60)
+let fieldOfViewRadians = m7.degToRad(60)
 
 
 const init = () => {
@@ -214,7 +214,7 @@ const init = () => {
 
 
 const updateFieldOfView = (event) => {
-  fieldOfViewRadians = m4.degToRad(event.target.value);
+  fieldOfViewRadians = m7.degToRad(event.target.value);
   render();
 }
 
@@ -247,14 +247,14 @@ const updateColor = (event) => {
 
 
 const computeModelViewMatrix = (shape, viewProjectionMatrix) => {
-  M = m4.translate(viewProjectionMatrix,
+  M = m7.translate(viewProjectionMatrix,
       shape.translation.x,
       shape.translation.y,
       shape.translation.z)
-  M = m4.xRotate(M, m4.degToRad(shape.rotation.x))
-  M = m4.yRotate(M, m4.degToRad(shape.rotation.y))
-  M = m4.zRotate(M, m4.degToRad(shape.rotation.z))
-  M = m4.scale(M, shape.scale.x, shape.scale.y, shape.scale.z)
+  M = m7.xRotate(M, m7.degToRad(shape.rotation.x))
+  M = m7.yRotate(M, m7.degToRad(shape.rotation.y))
+  M = m7.zRotate(M, m7.degToRad(shape.rotation.z))
+  M = m7.scale(M, shape.scale.x, shape.scale.y, shape.scale.z)
   return M
 }
 
@@ -282,9 +282,9 @@ const render = () => {
 
   const $shapeList = $("#object-list")
   $shapeList.empty()
-  let cameraMatrix = m4.identity();
+  let cameraMatrix = m7.identity();
   if(lookAt) {
-    cameraMatrix = m4.translate(
+    cameraMatrix = m7.translate(
         cameraMatrix,
         camera.translation.x,
         camera.translation.y,
@@ -293,39 +293,39 @@ const render = () => {
       cameraMatrix[12],
       cameraMatrix[13],
       cameraMatrix[14]]
-    cameraMatrix = m4.lookAt(
+    cameraMatrix = m7.lookAt(
         cameraPosition,
         target,
         up)
-    cameraMatrix = m4.inverse(cameraMatrix)
+    cameraMatrix = m7.inverse(cameraMatrix)
   }  else {
-    cameraMatrix = m4.zRotate(
+    cameraMatrix = m7.zRotate(
         cameraMatrix,
-        m4.degToRad(camera.rotation.z));
-    cameraMatrix = m4.xRotate(
+        m7.degToRad(camera.rotation.z));
+    cameraMatrix = m7.xRotate(
         cameraMatrix,
-        m4.degToRad(camera.rotation.x));
-    cameraMatrix = m4.yRotate(
+        m7.degToRad(camera.rotation.x));
+    cameraMatrix = m7.yRotate(
         cameraMatrix,
-        m4.degToRad(camera.rotation.y));
-    cameraMatrix = m4.translate(
+        m7.degToRad(camera.rotation.y));
+    cameraMatrix = m7.translate(
         cameraMatrix,
         camera.translation.x,
         camera.translation.y,
         camera.translation.z);
   }
-  const projectionMatrix = m4.perspective(
+  const projectionMatrix = m7.perspective(
       fieldOfViewRadians, aspect, zNear, zFar)
-  viewProjectionMatrix = m4.multiply(
+  viewProjectionMatrix = m7.multiply(
       projectionMatrix, cameraMatrix)
 
-  let worldMatrix = m4.identity()
+  let worldMatrix = m7.identity()
   const worldViewProjectionMatrix
-      = m4.multiply(viewProjectionMatrix, worldMatrix);
+      = m7.multiply(viewProjectionMatrix, worldMatrix);
   const worldInverseMatrix
-      = m4.inverse(worldMatrix);
+      = m7.inverse(worldMatrix);
   const worldInverseTransposeMatrix
-      = m4.transpose(worldInverseMatrix);
+      = m7.transpose(worldInverseMatrix);
 
   gl.uniformMatrix4fv(uniformWorldViewProjection, false,
       worldViewProjectionMatrix);
@@ -333,7 +333,7 @@ const render = () => {
       worldInverseTransposeMatrix);
 
   gl.uniform3fv(uniformReverseLightDirectionLocation,
-      m4.normalize(lightSource));
+      m7.normalize(lightSource));
 
 
 
@@ -396,7 +396,7 @@ const selectShape = (selectedIndex) => {
   document.getElementById("rx").value = shapes[selectedIndex].rotation.x
   document.getElementById("ry").value = shapes[selectedIndex].rotation.y
   document.getElementById('rz').value = shapes[selectedIndex].rotation.z
-  document.getElementById("fv").value = m4.radToDeg(fieldOfViewRadians)
+  document.getElementById("fv").value = m7.radToDeg(fieldOfViewRadians)
   const hexColor = webglUtils.rgbToHex(shapes[selectedIndex].color)
   document.getElementById("color").value = hexColor
 }
